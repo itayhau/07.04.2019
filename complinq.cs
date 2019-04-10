@@ -13,3 +13,22 @@
 
             int s1 = (from c in countries
                      select c.Size_km).Max();
+
+from p in Product
+join c in Catalog on c.Id equals p.CatalogId
+join m in Manufacturer on m.Id equals p.ManufacturerId
+where p.Active == 1
+select new { Name = p.Name, CatalogId = p.CatalogId, ManufacturerId = p.ManufacturerId, CatalogName = c.Name, ManufacturerName = m.Name };
+
+from p in Product
+from c in Catalog
+from m in Manufacturer
+where c.Id == p.CatalogId && m.Id == p.ManufacturerId && p.Active == 1
+select new 
+    { 
+        p.Name,
+        p.CatalogId,
+        p.ManufacturerId,
+        c.Name,
+        m.Name 
+    };
